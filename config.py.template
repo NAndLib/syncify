@@ -1,0 +1,4 @@
+# Set the following variables to the corresponding values
+SPOTIFY_CLIENT_ID='<client-id>'
+SPOTIFY_CLIENT_SECRET='<client-secret>'
+SPOTIFY_REDIRECT_URL='<url>'
