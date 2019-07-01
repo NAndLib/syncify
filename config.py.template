@@ -1,4 +1,5 @@
-# Set the following variables to the corresponding values
+# Set the following variables to the corresponding values and remove the
+# ".template" extension.
 SPOTIFY_CLIENT_ID='<client-id>'
 SPOTIFY_CLIENT_SECRET='<client-secret>'
 SPOTIFY_REDIRECT_URL='<url>'
