@@ -2,3 +2,8 @@
 SPOTIFY_CLIENT_ID='<client-id>'
 SPOTIFY_CLIENT_SECRET='<client-secret>'
 SPOTIFY_REDIRECT_URL='<url>'
+
+USER_NAME='username'
+PLAYLIST_NAME='%\'s Songs' % USER_NAME
+
+# vim: ft=python
