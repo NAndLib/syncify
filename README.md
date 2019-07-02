@@ -9,7 +9,11 @@ is to create a playlist of *all* saved songs and share that playlist. But this
 quickly becomes unmanagable as the playlist is updated. This script is meant to
 make that a bit more bearable.
 
-## Usage
+## Installation
+
+The script requires python 3+.
+
+Run `pip install -r requirements.txt` to install all requirements.
 
 For the script to run correctly, you'll need to edit `config.py.template` with
 the appropriate values first.
@@ -27,6 +31,8 @@ spotify authentication API will redirect to after successful login. The URL
 doesn’t need to work or be accessible, you can specify “http://localhost/”,
 after successful login you just need to copy the “http://localhost/?code=...”
 URL from your browser and paste it to the console where the script is running.
+
+## Usage
 
 After to you have the proper configurations, run:
 ```python

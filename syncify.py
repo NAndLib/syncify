@@ -7,6 +7,13 @@ import spotipy.util as sutil
 import config
 
 class Progress(object):
+    """
+    A simple progress indicator that can be used as a context manager.
+
+    The object can be initialized with a message. Upon successfully exiting the
+    will print "done," otherwise the error message and traceback will be printed
+    and the program will terminate.
+    """
     def __init__(self, message):
         self.message = message
     def __enter__(self):
@@ -37,6 +44,8 @@ def get_track_ids(tracks_page):
     return [item['track']['id'] for item in tracks_page['items']]
 
 def main():
+    # The script requires two scopes, one to read from the user's "Saved Songs"
+    # and the other to modify the user's public playlists
     scope = 'user-library-read playlist-modify-public'
     token = sutil.prompt_for_user_token(config.USER_NAME, scope,
                                    client_id=config.SPOTIFY_CLIENT_ID,
@@ -45,7 +54,7 @@ def main():
     if token:
         sp = spotipy.Spotify(auth=token)
 
-        # Find or create the playlist to add songs to
+        # Attempt to find the playlist specified by PLAYLIST_NAME in the config
         playlists = sp.current_user_playlists()
         target_playlist = None
         with Progress("Looking for playlist"):
@@ -58,13 +67,16 @@ def main():
                         break
                 playlists = page_next(sp, playlists)
 
+        # If no playlist with the specified name is found, create it.
         if not target_playlist:
             with Progress(
                     "No playlist found with name {0}, creating one".format(
                         config.PLAYLIST_NAME)):
                 target_playlist = sp.user_playlist_create(config.USER_NAME,
                                                           config.PLAYLIST_NAME) 
-        # Clear the playlist of all songs
+        # Clear the playlist of all songs,
+        # This is not a very expensive operation that ensures the playlist
+        # matches the list of saved songs down to the ordering of songs.
         with Progress("Clearing playlist"):
             sp.user_playlist_replace_tracks(config.USER_NAME,
                                             target_playlist['id'], [])
