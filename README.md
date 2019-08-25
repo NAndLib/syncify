@@ -13,7 +13,14 @@ make that a bit more bearable.
 
 The script requires python 3+.
 
-Run `pip install -r requirements.txt` to install all requirements.
+Run `pip3 install -r requirements.txt` to install all requirements.
+
+To run it from everywhere, run:
+```
+python syncify.py [--install] [--install-user]
+```
+`--install` will create an executable file in `/usr/bin`, or `$HOME/bin/` if
+`--install-user` is used.
 
 For the script to run correctly, you'll need to edit `config.py.template` with
 the appropriate values first.
@@ -36,5 +43,15 @@ URL from your browser and paste it to the console where the script is running.
 
 After to you have the proper configurations, run:
 ```python
-python syncify.py
+python3 syncify.py
 ```
+If you've "installed" it, simply run `syncify` from anywhere.
+
+## Arguments
+
+- `--help`: show all command line arguments.
+- `--install`: create an executable in `/usr/bin`.
+- `--install-user`: create an executable in `$HOME/bin`.
+- `--continuous [INTERVAL]`: run the script every INTERVAL seconds.
+- `--stdout`: change the output for stdout.
+- `--stderr`: change the output for stderr.
